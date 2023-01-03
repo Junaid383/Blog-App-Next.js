@@ -2,9 +2,6 @@ import React from "react";
 import Link from "next/link";
 
 function index() {
-
-
-  const data = "Ali";
   return (
     <>
       <section class="details-card">
@@ -28,13 +25,8 @@ function index() {
                   </p>
 
                   <Link legacyBehavior href="/blog/blog1">
-                    <button class="btn-card">
-                      Read
-                    </button>
+                    <button class="btn-card">Read</button>
                   </Link>
-
-
-                 
                 </div>
               </div>
             </div>
