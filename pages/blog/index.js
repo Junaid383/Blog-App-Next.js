@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Card from "./Card";
+import { mongoose } from "mongoose";
+import blogSchema from "../../modals/blogSchema";
+
+const mongoDB_URL = `mongodb+srv://junaid:1234@cluster0.fcspjl4.mongodb.net/test?retryWrites=true&w=majority`;
 
 const Dummy_data = [
   {
@@ -27,29 +31,30 @@ const Dummy_data = [
   {
     id: "b4",
     heading: "Heading 4",
-    image: "https://placeimg.com/380/230/nature",
+    image: "https://placeimg.com/380/230/nature1",
     content:
       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, voluptatum! Dolor quo, perspiciatis voluptas total",
   },
   {
     id: "b5",
     heading: "Heading 5",
-    image: "https://placeimg.com/380/230/tech",
+    image: "https://placeimg.com/380/230/tech1",
     content:
       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, voluptatum! Dolor quo, perspiciatis voluptas total",
   },
   {
     id: "b3",
     heading: "Heading 3",
-    image: "https://placeimg.com/380/230/animals",
+    image: "https://placeimg.com/380/230/animals1",
     content:
       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, voluptatum! Dolor quo, perspiciatis voluptas total",
   },
 ];
 
-function index(props) {
-  const [loadBlog, setLoadedBlod] = useState([]);
+function Index({ getblogs }) {
+  // console.log("INDEX FILE" , getblogs)
 
+  const [loadBlog, setLoadedBlod] = useState([]);
   useEffect(() => {
     return () => {
       setLoadedBlod(Dummy_data);
@@ -61,18 +66,34 @@ function index(props) {
       <section className="details-card">
         <div className="container">
           <div className="row">
-          
-            <Card blogData={loadBlog} />
-          
+            <Card getblogs={getblogs} />
           </div>
 
           <br></br>
-
-         
         </div>
       </section>
     </>
   );
 }
+export default Index;
 
-export default index;
+export async function getServerSideProps() {
+  if (!mongoose.connections[0].readyState) {
+    await mongoose.connect(mongoDB_URL);
+  }
+
+  try {
+    let getblogs = await blogSchema.find();
+    console.log("SSP--------", getblogs);
+
+    return {
+      props: { getblogs: JSON.parse(JSON.stringify(getblogs)) }, // will be passed to the page component as props
+    };
+  } catch (error) {
+    return {
+      props: {
+        error: error.error,
+      },
+    };
+  }
+}

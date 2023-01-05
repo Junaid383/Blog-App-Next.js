@@ -1,30 +1,33 @@
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import CardItem from "./CardItem";
+import PageNo from "./[pageNo]";
 
 function Card(props) {
   const router = useRouter();
   const [loadBlog, setLoadedBlod] = useState([]);
+  console.log(props.getblogs)
 
-  //
-  useEffect(() => {
-    setLoadedBlod(props.blogData);
-  }, []);
+  // useEffect(() => {
+  //   // setLoadedBlod(getblogs);
+  // }, []);
 
   return (
     <>
-      {props.blogData.map((blogitem) => (
+      {props.getblogs.map((blogitem, idx) => (
         <CardItem
+          key={idx}
           id={blogitem.id}
           image={blogitem.image}
           heading={blogitem.heading}
           content={blogitem.content}
         />
-        
       ))}
+
+
     </>
   );
 }
 
 export default Card;
+

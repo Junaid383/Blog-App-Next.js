@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-function pageNo() {
+function PageNo() {
   const router = useRouter();
-  const pageNumber = router.query.pageNo;
+  const pageNumber = router.query.PageNo;
   return (
-    <div>
+    <div className="pageContent" >
       
       <section className="details-card">
         <div className="container">
@@ -38,4 +38,19 @@ function pageNo() {
   );
 }
 
-export default pageNo;
+export default PageNo;
+
+
+
+// function Page({ stars , data }) {
+//   console.log(data)
+//   return <div>Next stars: {stars}</div>
+// }
+
+// Page.getInitialProps = async (ctx) => {
+//   const res = await fetch('https://api.github.com/repos/vercel/next.js')
+//   const json = await res.json()
+//   return { stars: json.stargazers_count , data: json }
+// }
+
+// export default Page

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import axios from "axios";
 import Index from "./blog";
 import {
   MDBBtn,
@@ -13,7 +13,13 @@ import {
   MDBIcon,
 } from "mdb-react-ui-kit";
 
-function addblog() {
+
+
+// const mongoDB_URL = `mongodb+srv://junaid:1234@cluster0.fcspjl4.mongodb.net/BlogApp?retryWrites=true&w=majority`
+
+
+
+function Addblog() {
   const [user, setUser] = useState({
     name: "",
     heading: "",
@@ -34,12 +40,11 @@ function addblog() {
     if (name && heading && blog) {
       console.log("object", user);
 
-      // setUser({
-      //   name: "",
-      //   heading: "",
-      //   blog: "",
-      //   image: "",
-      // })
+      // const response = await axios.post("/addblog", {
+      //   data: {
+      //     user,
+      //   },
+      // });
     } else {
       alert("Filled ALl fields");
     }
@@ -160,4 +165,4 @@ function addblog() {
   );
 }
 
-export default addblog;
+export default Addblog;

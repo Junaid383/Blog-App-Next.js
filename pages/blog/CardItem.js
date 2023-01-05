@@ -5,15 +5,15 @@ import { useRouter } from "next/router";
 function CardItem(props) {
     const router = useRouter();
 
-  console.log(props);
+// console.log(props)
 
-  const showDetailsHandler = () => {
+    const showDetailsHandler = () => {
     router.push("/blog/" + props.id);
     // router.push('/blog/' + props.id)
   };
   return (
     <>
-      <div className="col-md-4">
+      <div className="col-md-4 pd_bottom" >
         <div className="card-content">
           <div className="card-img">
             <img src={props.image} alt=""></img>
@@ -28,6 +28,7 @@ function CardItem(props) {
             <button className="btn-card" onClick={showDetailsHandler}>
               Read
             </button>
+
           </div>
         </div>
       </div>

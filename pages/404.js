@@ -1,4 +1,5 @@
-import React from 'react'
+import Link from "next/link";
+
 function error() {
   return (
     <>
@@ -12,13 +13,13 @@ function error() {
                 </div>
 
                 <div className="contant_box_404">
-                  <h3 className="h2">Look like you're lost</h3>
+                  <h3 className="h2">Look like youre lost</h3>
 
                   <p>the page you are looking for not available!</p>
 
-                  <a href="/" className="link_404">
+                  <Link href="/" className="link_404">
                    Back to Home
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
