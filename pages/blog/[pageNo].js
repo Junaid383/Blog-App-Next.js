@@ -8,10 +8,8 @@ const mongoDB_URL = `mongodb+srv://junaid:1234@cluster0.fcspjl4.mongodb.net/test
 
 function PageNo({curr_blog}) {
 
-  console.log("object" , curr_blog)
-  // const router = useRouter();
-  // const blog_ID = router.query;
-  // console.log("page number" , blog_ID)
+  // console.log("object" , curr_blog)
+  
  
   return (
     <div className="pageContent" >
@@ -35,6 +33,8 @@ function PageNo({curr_blog}) {
                   <Link legacyBehavior href="/blog/">
                     <a className="btn-card">Back</a>
                   </Link>
+
+                
                 </div>
               </div>
             </div>
@@ -49,7 +49,7 @@ export default PageNo;
 
 
 export async function getServerSideProps(context) {
-  const id = context.params.pageNo
+  const id = context.params.pageNo     //pageNo File name- = =  URL 
   // console.log(`blog id `, id)
   if (!mongoose.connections[0].readyState) {
     await mongoose.connect(mongoDB_URL);
