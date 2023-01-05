@@ -6,7 +6,7 @@ import PageNo from "./[pageNo]";
 function Card(props) {
   const router = useRouter();
   const [loadBlog, setLoadedBlod] = useState([]);
-  console.log(props.getblogs)
+  // console.log(props.getblogs)
 
   // useEffect(() => {
   //   // setLoadedBlod(getblogs);
@@ -17,7 +17,7 @@ function Card(props) {
       {props.getblogs.map((blogitem, idx) => (
         <CardItem
           key={idx}
-          id={blogitem.id}
+          id={blogitem._id}
           image={blogitem.image}
           heading={blogitem.heading}
           content={blogitem.content}

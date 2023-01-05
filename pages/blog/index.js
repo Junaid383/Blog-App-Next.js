@@ -4,7 +4,8 @@ import Card from "./Card";
 import { mongoose } from "mongoose";
 import blogSchema from "../../modals/blogSchema";
 
-const mongoDB_URL = `mongodb+srv://junaid:1234@cluster0.fcspjl4.mongodb.net/test?retryWrites=true&w=majority`;
+
+// const mongoDB_URL = `mongodb+srv://junaid:1234@cluster0.fcspjl4.mongodb.net/test?retryWrites=true&w=majority`;
 
 const Dummy_data = [
   {
@@ -54,6 +55,9 @@ const Dummy_data = [
 function Index({ getblogs }) {
   // console.log("INDEX FILE" , getblogs)
 
+
+  
+  
   const [loadBlog, setLoadedBlod] = useState([]);
   useEffect(() => {
     return () => {
@@ -79,12 +83,12 @@ export default Index;
 
 export async function getServerSideProps() {
   if (!mongoose.connections[0].readyState) {
-    await mongoose.connect(mongoDB_URL);
+    await mongoose.connect(process.env.MONGODB_URL);
   }
 
   try {
     let getblogs = await blogSchema.find();
-    console.log("SSP--------", getblogs);
+    // console.log("SSP--------", getblogs);
 
     return {
       props: { getblogs: JSON.parse(JSON.stringify(getblogs)) }, // will be passed to the page component as props

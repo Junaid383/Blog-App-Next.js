@@ -1,11 +1,12 @@
 import React from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 
 function CardItem(props) {
     const router = useRouter();
 
-// console.log(props)
+// console.log("Item Page",props)
 
     const showDetailsHandler = () => {
     router.push("/blog/" + props.id);
@@ -24,10 +25,11 @@ function CardItem(props) {
           <div className="card-desc">
             <h3>{props.heading}</h3>
             <p>{props.content}</p>
-
-            <button className="btn-card" onClick={showDetailsHandler}>
+          <Link href={"/blog/" + props.id }>
+            <button className="btn-card">
               Read
             </button>
+          </Link>
 
           </div>
         </div>
