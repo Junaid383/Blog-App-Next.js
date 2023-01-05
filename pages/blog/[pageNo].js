@@ -1,9 +1,18 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-function PageNo() {
-  const router = useRouter();
-  const pageNumber = router.query.PageNo;
+import { mongoose } from "mongoose";
+import blogSchema from "../../modals/blogSchema";
+
+const mongoDB_URL = `mongodb+srv://junaid:1234@cluster0.fcspjl4.mongodb.net/test?retryWrites=true&w=majority`;
+
+function PageNo({curr_blog}) {
+
+  console.log("object" , curr_blog)
+  // const router = useRouter();
+  // const blog_ID = router.query;
+  // console.log("page number" , blog_ID)
+ 
   return (
     <div className="pageContent" >
       
@@ -13,17 +22,15 @@ function PageNo() {
             <div className="col-md-10">
               <div className="card-content">
                 <div className="card-img">
-                  <img src="https://placeimg.com/380/230/nature" alt=""></img>
+                  <img src={curr_blog.image} alt=""></img>
                   <span>
-                    <h4>heading</h4>
+                    <h4>{curr_blog.heading}</h4>
                   </span>
                 </div>
                 <div className="card-desc">
-                  <h3>Heading</h3>
+                  <h3>{curr_blog.heading}</h3>
                   <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Laboriosam, voluptatum! Dolor quo, perspiciatis voluptas
-                    totam
+                  {curr_blog.content}
                   </p>
                   <Link legacyBehavior href="/blog/">
                     <a className="btn-card">Back</a>
@@ -41,16 +48,26 @@ function PageNo() {
 export default PageNo;
 
 
+export async function getServerSideProps(context) {
+  const id = context.params.pageNo
+  // console.log(`blog id `, id)
+  if (!mongoose.connections[0].readyState) {
+    await mongoose.connect(mongoDB_URL);
+  }
 
-// function Page({ stars , data }) {
-//   console.log(data)
-//   return <div>Next stars: {stars}</div>
-// }
+  try {
+    
+    let getblogs = await blogSchema.findById(id);
+    // console.log("SSP--------", getblogs);
 
-// Page.getInitialProps = async (ctx) => {
-//   const res = await fetch('https://api.github.com/repos/vercel/next.js')
-//   const json = await res.json()
-//   return { stars: json.stargazers_count , data: json }
-// }
-
-// export default Page
+    return {
+      props: { curr_blog: JSON.parse(JSON.stringify(getblogs)) }, // will be passed to the page component as props
+    };
+  } catch (error) {
+    return {
+      props: {
+        error: error.error,
+      },
+    };
+  }
+}

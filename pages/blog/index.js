@@ -4,8 +4,7 @@ import Card from "./Card";
 import { mongoose } from "mongoose";
 import blogSchema from "../../modals/blogSchema";
 
-
-// const mongoDB_URL = `mongodb+srv://junaid:1234@cluster0.fcspjl4.mongodb.net/test?retryWrites=true&w=majority`;
+const mongoDB_URL = `mongodb+srv://junaid:1234@cluster0.fcspjl4.mongodb.net/test?retryWrites=true&w=majority`;
 
 const Dummy_data = [
   {
@@ -55,9 +54,6 @@ const Dummy_data = [
 function Index({ getblogs }) {
   // console.log("INDEX FILE" , getblogs)
 
-
-  
-  
   const [loadBlog, setLoadedBlod] = useState([]);
   useEffect(() => {
     return () => {
@@ -83,7 +79,9 @@ export default Index;
 
 export async function getServerSideProps() {
   if (!mongoose.connections[0].readyState) {
-    await mongoose.connect(process.env.MONGODB_URL);
+    // await mongoose.connect(process.env.MONGODB_URL);
+    await mongoose.connect(mongoDB_URL);
+
   }
 
   try {

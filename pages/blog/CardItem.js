@@ -5,14 +5,9 @@ import Link from "next/link";
 
 function CardItem(props) {
     const router = useRouter();
-
 // console.log("Item Page",props)
-
-    const showDetailsHandler = () => {
-    router.push("/blog/" + props.id);
-    // router.push('/blog/' + props.id)
-  };
-  return (
+  
+return (
     <>
       <div className="col-md-4 pd_bottom" >
         <div className="card-content">
@@ -40,3 +35,5 @@ function CardItem(props) {
 }
 
 export default CardItem;
+
+
