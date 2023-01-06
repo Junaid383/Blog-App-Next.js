@@ -21,6 +21,7 @@ function Card(props) {
           image={blogitem.image}
           heading={blogitem.heading}
           content={blogitem.content}
+          author = {blogitem.author}
         />
       ))}
 
