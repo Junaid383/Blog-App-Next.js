@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
-import Index from "./blog";
 import {
   MDBBtn,
   MDBContainer,
@@ -12,18 +10,17 @@ import {
   MDBInput,
   MDBIcon,
 } from "mdb-react-ui-kit";
-
-
+import { useRouter } from 'next/navigation';
 
 // const mongoDB_URL = `mongodb+srv://junaid:1234@cluster0.fcspjl4.mongodb.net/BlogApp?retryWrites=true&w=majority`
 
-
-
 function Addblog() {
+  const router = useRouter();
+
   const [user, setUser] = useState({
-    name: "",
+    author: "",
     heading: "",
-    blog: "",
+    content: "",
     image: "",
   });
 
@@ -32,21 +29,36 @@ function Addblog() {
     name = e.target.name;
     value = e.target.value;
     setUser({ ...user, [name]: value });
+    // console.log(user)
   };
 
   const postData = async (e) => {
     e.preventDefault();
-    const { name, heading, blog, image } = user;
-    if (name && heading && blog) {
-      console.log("object", user);
 
-      // const response = await axios.post("/addblog", {
-      //   data: {
-      //     user,
-      //   },
-      // });
-    } else {
-      alert("Filled ALl fields");
+    try {
+      const { author, heading, content, image } = user;
+      if (author && heading && content && image) {
+        const res = await fetch("/api/addData", {
+          method: "POST",
+          headers: {
+            // "Content-Length": "<calculated when request is sent>",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user),
+        });
+        console.log("Data Entered", user);
+        alert("Data Entered")
+        router.push('/blog')
+      }
+      else{
+        console.log("User" , user)
+        alert("Filled All fields")
+      }
+
+    } catch (error) {
+      console.log("Data Not Entered");
+
+      // setMessage('Failed to add pet')
     }
   };
 
@@ -75,12 +87,12 @@ function Addblog() {
                     <div className="d-flex flex-row align-items-center mb-4 ">
                       <MDBIcon fas icon="user me-3" size="lg" />
                       <MDBInput
-                        name="name"
+                        name="author"
                         label="Author Name "
                         id="form1"
                         type="text"
                         autoComplete="off"
-                        value={user.name}
+                        value={user.author}
                         onChange={dataHandler}
                         className="w-100"
                       />
@@ -101,15 +113,15 @@ function Addblog() {
                     </div>
 
                     <div className="d-flex flex-row align-items-center mb-4 ">
-                      <MDBIcon fas icon="blog me-3" size="lg" />
+                      <MDBIcon fas icon="pencil me-3" size="lg" />
 
                       <textarea
-                        name="blog"
+                        name="content"
                         label="Blog"
                         id="form1"
                         type="text"
                         autoComplete="off"
-                        value={user.blog}
+                        value={user.content}
                         onChange={dataHandler}
                         className="w-100 form-control"
                       ></textarea>
@@ -117,15 +129,15 @@ function Addblog() {
 
                     <div className="d-flex flex-row align-items-center mb-4">
                       <MDBIcon fas icon="image me-3" size="lg" />
-                      <input
-                        type="file"
-                        name="img"
-                        label="image"
+                      <MDBInput
+                        name="image"
+                        label="Image URL "
                         id="form1"
+                        type="text"
                         autoComplete="off"
                         value={user.image}
                         onChange={dataHandler}
-                        className="w-100 form-control"
+                        className="w-100"
                       />
                     </div>
 
@@ -156,8 +168,6 @@ function Addblog() {
             </MDBCardBody>
           </MDBCard>
         </MDBContainer>
-
-        {/* <Index user = {user} /> */}
 
         {/* <ToastContainer /> */}
       </section>

@@ -13,11 +13,11 @@ function Navbar() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <Link href="/home">
+                {/* <Link href="/home">
                   <h5 className="nav-link active" aria-current="page">
                     Home
                   </h5>
-                </Link>
+                </Link> */}
               </li>
 
               <li className="nav-item">
