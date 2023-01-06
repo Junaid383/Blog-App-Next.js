@@ -19,14 +19,18 @@ import {
 } from "mdb-react-ui-kit";
 
 function PageNo({ curr_blog }) {
+  const router = useRouter();
+  let id = router.query.edit
   const [user, setUser] = useState({
-    name: "",
+    author: "",
     heading: "",
-    blog: "",
+    content: "",
     image: "",
+    id:id
   });
 
-  let blog_string = curr_blog.content;
+ 
+  // console.log("object ID" , id)
   let name, value;
   const dataHandler = (e) => {
     name = e.target.name;
@@ -34,37 +38,36 @@ function PageNo({ curr_blog }) {
     setUser({ ...user, [name]: value });
   };
 
-  console.log("Current Blog" , curr_blog)
+  // console.log("Current Blog" , curr_blog)
 
-  // const postData = async (e) => {
-  //   e.preventDefault();
+  const postData = async (e) => {
+    e.preventDefault();
 
-  //   try {
-  //     const { author, heading, content, image } = user;
-  //     if (author && heading && content && image) {
-  //       const res = await fetch("/api/addData", {
-  //         method: "POST",
-  //         headers: {
-  //           // "Content-Length": "<calculated when request is sent>",
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify(user),
-  //       });
-  //       console.log("Data Entered", user);
-  //       alert("Data Entered")
-  //       router.push('/blog')
-  //     }
-  //     else{
-  //       console.log("User" , user)
-  //       alert("Filled All fields")
-  //     }
+    try {
+      const { author, heading, content, image } = user;
+      if (author && heading && content && image) {
+        const res = await fetch("/api/updateData", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user),
+        });
+        console.log("Data Update", user);
+        alert("Data Update")
+        router.push('/blog')
+      }
+      else{
+        console.log("User" , user)
+        alert("Filled All fields")
+      }
 
-  //   } catch (error) {
-  //     console.log("Data Not Entered");
+    } catch (error) {
+      console.log("Data Not Entered");
 
-  //     // setMessage('Failed to add pet')
-  //   }
-  // };
+      // setMessage('Failed to add pet')
+    }
+  };
 
   return (
     <>
@@ -75,7 +78,7 @@ function PageNo({ curr_blog }) {
               <form
                 method="POST"
                 onSubmit={(e) => {
-                    // postData(e);
+                    postData(e);
                 }}
               >
                 <MDBRow>
@@ -91,12 +94,12 @@ function PageNo({ curr_blog }) {
                     <div className="d-flex flex-row align-items-center mb-4 ">
                       <MDBIcon fas icon="user me-3" size="lg" />
                       <MDBInput
-                        name="name"
+                        name="author"
                         label="Author Name "
                         id="form1"
                         type="text"
                         autoComplete="off"
-                        value={user.name}
+                        value={user.author}
                         onChange={dataHandler}
                         className="w-100"
                       />
@@ -120,12 +123,12 @@ function PageNo({ curr_blog }) {
                       <MDBIcon fas icon="blog me-3" size="lg" />
 
                       <textarea
-                        name="blog"
+                        name="content"
                         label="Blog"
                         id="form1"
                         type="text"
                         autoComplete="off"
-                        value={user.blog}
+                        value={user.content}
                         onChange={dataHandler}
                         className="w-100 form-control"
                       ></textarea>
@@ -135,7 +138,7 @@ function PageNo({ curr_blog }) {
                       <MDBIcon fas icon="image me-3" size="lg" />
                       <input
                         type="text"
-                        name="img"
+                        name="image"
                         label="image"
                         id="form1"
                         autoComplete="off"
@@ -144,11 +147,10 @@ function PageNo({ curr_blog }) {
                         className="w-100 form-control"
                       />
                     </div>
-                    <Link href={"/blog"}>
+                  
                       <MDBBtn className="mb-4" size="lg">
                         Update Blog
                       </MDBBtn>
-                    </Link>
 
                     <br></br>
                   </MDBCol>

@@ -26,7 +26,7 @@ return (
               Read
             </button>
           </Link> 
-
+       
           <Link href={"/blog/edit/" + props.id}>
             <button className="btn-card">
               Edit
