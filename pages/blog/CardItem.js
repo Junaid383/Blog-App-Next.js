@@ -127,7 +127,7 @@ function CardItem(props) {
               style={{ color: "#d11a2a" }}
             ></i>
             <Modal toggle={() => setModalOpen(!modalOpen)} isOpen={modalOpen}>
-              <ModalBody>Are you sure to delete {props.id}</ModalBody>
+              <ModalBody>Are you sure to delete</ModalBody>
               <ModalFooter>
                 <Button
                   color="secondary"

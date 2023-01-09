@@ -91,7 +91,9 @@ section {
 }
 .details-card {
   background: #ecf0f1;
+  height: 100vh;
 }
+  
 
 .card-content {
   background: #ffffff;
