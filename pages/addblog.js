@@ -16,12 +16,19 @@ import { useRouter } from "next/navigation";
 
 function Addblog() {
   const router = useRouter();
+  // var date = new Date();
+  // date = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
+
+  const timeElapsed = Date.now();
+  const today = new Date(timeElapsed);
+  let date = today.toDateString();
 
   const [user, setUser] = useState({
     author: "",
     heading: "",
     content: "",
     image: "",
+    date: date,
   });
 
   let name, value;
@@ -29,38 +36,34 @@ function Addblog() {
     name = e.target.name;
     value = e.target.value;
     setUser({ ...user, [name]: value });
-    
+
     // console.log(user);
   };
 
   const postData = async (e) => {
     e.preventDefault();
     try {
-      const { author, heading, content, image } = user;
-      
+      const { author, heading, content, image, date } = user;
+
       if (author && heading && content && image) {
-      
-          
-          const res = await fetch("/api/addData", {
-            method: "POST",
-            headers: {
-              "Content-Length": "<calculated when request is sent>",
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(user),
-          });
-          console.log("Data Entered", user);
-          alert("Data Entered");
-          router.push("/blog");
-       
-        
+        const res = await fetch("/api/addData", {
+          method: "POST",
+          headers: {
+            "Content-Length": "<calculated when request is sent>",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user),
+        });
+        console.log("Data Entered", user);
+        alert("Data Entered");
+        router.push("/blog");
       } else {
         console.log("User", user);
         alert("Filled All fields");
       }
     } catch (error) {
       console.log("Data Not Entered");
-      alert("Data Not Entered" , error)
+      alert("Data Not Entered", error);
       // setMessage('Failed to add pet')
     }
   };
@@ -129,7 +132,7 @@ function Addblog() {
                         value={user.content}
                         onChange={dataHandler}
                         className="w-100 form-control"
-                     //   maxLength="10"
+                        //   maxLength="10"
                         required
                       ></textarea>
                     </div>
