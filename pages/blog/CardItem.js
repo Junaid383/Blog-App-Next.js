@@ -71,87 +71,77 @@ function CardItem(props) {
                     Edit
                   </button>
                 </Link>
-                <Link href={"/blog/delete/" + props.id}>
+              
                   <button
                     className="btn-card1"
                     style={{ backgroundColor: "#d11a2a", marginLeft: "20px" }}
                   >
                     Delete
                   </button>
-                </Link>
+              
               </div>
           </div>
         </div>
       </div> */}
 
-      {/* <table id="example" className="table table-striped"> */}
-      <tbody>
-        <tr>
-          <td>{counter} </td>
-          <td> {cap_author}</td>
-          <td> {props.heading}</td>
-          <td> {props.date}</td>
-          <td>
-            {" "}
-            <Link href={"/blog/" + props.id}>
-              {/* <button className="btn-card ">Read</button> */}
+    
+    
+    
+    
+        <tbody>
+          <tr>
+            <td>{} </td>
+            <td> {cap_author}</td>
+            <td> {props.heading}</td>
+            <td> {props.date}</td>
+            <td>
+              {" "}
+              <Link href={"/blog/" + props.id}>
+              
+                <i
+                  className="fas fa-eye fa-2x"
+                  style={{ color: "Blue", paddingRight: "15px", size: "20px" }}
+                ></i>
+              </Link>
+              <Link href={"/blog/edit/" + props.id}>
+    
+                <i
+                  className="fas fa-edit  fa-2x"
+                  style={{ color: "green", paddingRight: "15px" }}
+                ></i>
+              </Link>
+              
               <i
-                className="fas fa-eye fa-2x"
-                style={{ color: "Blue", paddingRight: "15px", size: "20px" }}
+                className="fas fa-trash-alt fa-2x"
+                onClick={() => setModalOpen(!modalOpen)}
+                style={{ color: "#d11a2a" }}
               ></i>
-            </Link>
-            <Link href={"/blog/edit/" + props.id}>
-              {/* <button
-                className="btn-card1 "
-                style={{ backgroundColor: "green", marginLeft: "20px" }}
-              >
-                Edit
-              </button> */}
-              <i
-                className="fas fa-edit  fa-2x"
-                style={{ color: "green", paddingRight: "15px" }}
-              ></i>
-            </Link>
-            {/* <Link href={"/blog/delete/" + props.id}> */}
-            {/* <button
-              className="btn-card1"
-              style={{ backgroundColor: "#d11a2a", marginLeft: "20px" }}
-              onClick={() => setModalOpen(!modalOpen)}
-            >
-              Delete
-            </button> */}
-            {/* </Link> */}
-            <i
-              className="fas fa-trash-alt fa-2x"
-              onClick={() => setModalOpen(!modalOpen)}
-              style={{ color: "#d11a2a" }}
-            ></i>
-            <Modal toggle={() => setModalOpen(!modalOpen)} isOpen={modalOpen}>
-              <ModalBody>Are you sure to delete</ModalBody>
-              <ModalFooter>
-                <Button
-                  color="secondary"
-                  type="button"
-                  onClick={() => setModalOpen(!modalOpen)}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  color="primary"
-                  type="button"
-                  onClick={() => {
-                    deleteData(props.id);
-                  }}
-                >
-                  Delete
-                </Button>
-              </ModalFooter>
-            </Modal>
-          </td>
-        </tr>
-      </tbody>
+              <Modal toggle={() => setModalOpen(!modalOpen)} isOpen={modalOpen}>
+                <ModalBody>Are you sure to delete</ModalBody>
+                <ModalFooter>
+                  <Button
+                    color="secondary"
+                    type="button"
+                    onClick={() => setModalOpen(!modalOpen)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    color="primary"
+                    type="button"
+                    onClick={() => {
+                      deleteData(props.id);
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </ModalFooter>
+              </Modal>
+            </td>
+          </tr>
+        </tbody>
 
-      {/* </table> */}
+     
     </>
   );
 }
