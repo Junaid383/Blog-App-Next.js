@@ -22,6 +22,8 @@ function Card(props) {
           heading={blogitem.heading}
           content={blogitem.content}
           author = {blogitem.author}
+          date = {blogitem.date}
+          // createdAt = {blogitem.createdAt}
         />
       ))}
 

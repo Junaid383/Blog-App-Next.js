@@ -3,7 +3,7 @@ import connectDB from "../../midleware/mongoose";
 
 const handlerfun = async (req, res) => {
   console.log(req.body)
-  const {  author , heading, content , image } = req.body;
+  const {  author , heading, content , image  , date} = req.body;
 
   if (req.method == "POST") {
     // console.log(`req `, req);
@@ -12,8 +12,10 @@ const handlerfun = async (req, res) => {
       author,
       heading,
       content,
-      image
+      image,
+      date
     });
+    console.log("object " , p)
     const datasave = await p.save();
 
     // }

@@ -5,7 +5,8 @@ const blogSchema = new mongoose.Schema(
     author: { type: String },
     heading: { type: String },
     content: { type: String },
-    image: {type : String}
+    image: {type : String},
+    date :{type:String}
   },
   { timestamps: true }
 );
