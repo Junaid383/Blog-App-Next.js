@@ -156,7 +156,11 @@ function PageNo({ curr_blog }) {
                   </MDBCol>
 
                   {/* ===============================Data Displayy========================= */}
+
+                
                 </MDBRow>
+
+                
               </form>
             </MDBCardBody>
           </MDBCard>
@@ -169,7 +173,7 @@ function PageNo({ curr_blog }) {
                   <div className="card-img">
                     <img src={curr_blog.image} alt=""></img>
                   </div>
-                  <div className="card-desc">
+                  <div className="card-desc1">
                     <h3>{curr_blog.heading}</h3>
 
                     <p>{curr_blog.content}</p>

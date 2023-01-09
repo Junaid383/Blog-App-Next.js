@@ -21,7 +21,7 @@ function CardItem(props) {
           </div>
           <div className="card-desc">
             <h3>{props.heading}</h3>
-            <p>
+            <p >
               {blog_string.slice(0, 200) +
                 (blog_string.length > 200 ? "  ..." : "")}{" "}
             </p>
@@ -31,15 +31,15 @@ function CardItem(props) {
 
             <Link href={"/blog/edit/" + props.id}>
               <button
-                className="btn-card "
-                style={{ backgroundColor: "green", marginLeft: "20px" }}
+                className="btn-card1 "
+                style={{ backgroundColor: "green",  marginLeft: "20px"}}
               >
                 Edit
               </button>
             </Link>
             <Link href={"/blog/delete/" + props.id}>
               <button
-                className="btn-card"
+                className="btn-card1"
                 style={{ backgroundColor: "#d11a2a", marginLeft: "20px" }}
               >
                 Delete

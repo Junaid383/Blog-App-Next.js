@@ -30,37 +30,37 @@ function Addblog() {
     value = e.target.value;
     setUser({ ...user, [name]: value });
     
-    console.log(user);
+    // console.log(user);
   };
 
   const postData = async (e) => {
     e.preventDefault();
-
     try {
       const { author, heading, content, image } = user;
       
-      if (author && heading && content&& image) {
-        if(content.length() < 200){
+      if (author && heading && content && image) {
+      
           
-        }
-        const res = await fetch("/api/addData", {
-          method: "POST",
-          headers: {
-            // "Content-Length": "<calculated when request is sent>",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(user),
-        });
-        console.log("Data Entered", user);
-        alert("Data Entered");
-        router.push("/blog");
+          const res = await fetch("/api/addData", {
+            method: "POST",
+            headers: {
+              "Content-Length": "<calculated when request is sent>",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(user),
+          });
+          console.log("Data Entered", user);
+          alert("Data Entered");
+          router.push("/blog");
+       
+        
       } else {
         console.log("User", user);
         alert("Filled All fields");
       }
     } catch (error) {
       console.log("Data Not Entered");
-
+      alert("Data Not Entered" , error)
       // setMessage('Failed to add pet')
     }
   };

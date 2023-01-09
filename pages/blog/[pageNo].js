@@ -25,7 +25,7 @@ function PageNo({curr_blog}) {
                     <h4>{curr_blog.heading}</h4>
                   </span>
                 </div>
-                <div className="card-desc">
+                <div className="card-desc1">
                   <h3>{curr_blog.heading}</h3>
                   <p>
                   {curr_blog.content}
