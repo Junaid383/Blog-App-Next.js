@@ -44,7 +44,7 @@ function PageNo({ curr_blog }) {
     e.preventDefault();
 
     try {
-      const { author, heading, content, image } = user;
+      const { author, heading, content, image } = curr_blog;
       if (author && heading && content && image) {
         const res = await fetch("/api/updateData", {
           method: "POST",

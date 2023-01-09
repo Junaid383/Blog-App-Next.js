@@ -14,23 +14,32 @@ function Card(props) {
 
   return (
     <>
+      <table className="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Author</th>
+            <th scope="col">Heading</th>
+            <th scope="col">Date</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+
       {props.getblogs.map((blogitem, idx) => (
         <CardItem
-          key={idx}
-          id={blogitem._id}
-          image={blogitem.image}
-          heading={blogitem.heading}
-          content={blogitem.content}
-          author = {blogitem.author}
-          date = {blogitem.date}
-          // createdAt = {blogitem.createdAt}
+        key={idx}
+        id={blogitem._id}
+        image={blogitem.image}
+        heading={blogitem.heading}
+        content={blogitem.content}
+        author={blogitem.author}
+        date={blogitem.date}
+        // createdAt = {blogitem.createdAt}
         />
-      ))}
-
-
+        ))}
+        </table>
     </>
   );
 }
 
 export default Card;
-

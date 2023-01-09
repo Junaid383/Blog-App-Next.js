@@ -14,6 +14,7 @@ function Index({ getblogs }) {
   return (
     <>
       <section className="details-card">
+    {/* <input type="search"></input> */}
         <div className="container">
           <div className="row">
             <Card getblogs={getblogs} />
