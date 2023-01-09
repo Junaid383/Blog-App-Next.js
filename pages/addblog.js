@@ -10,7 +10,7 @@ import {
   MDBInput,
   MDBIcon,
 } from "mdb-react-ui-kit";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 // const mongoDB_URL = `mongodb+srv://junaid:1234@cluster0.fcspjl4.mongodb.net/BlogApp?retryWrites=true&w=majority`
 
@@ -29,7 +29,8 @@ function Addblog() {
     name = e.target.name;
     value = e.target.value;
     setUser({ ...user, [name]: value });
-    // console.log(user)
+    
+    console.log(user);
   };
 
   const postData = async (e) => {
@@ -37,7 +38,11 @@ function Addblog() {
 
     try {
       const { author, heading, content, image } = user;
-      if (author && heading && content && image) {
+      
+      if (author && heading && content&& image) {
+        if(content.length() < 200){
+          
+        }
         const res = await fetch("/api/addData", {
           method: "POST",
           headers: {
@@ -47,14 +52,12 @@ function Addblog() {
           body: JSON.stringify(user),
         });
         console.log("Data Entered", user);
-        alert("Data Entered")
-        router.push('/blog')
+        alert("Data Entered");
+        router.push("/blog");
+      } else {
+        console.log("User", user);
+        alert("Filled All fields");
       }
-      else{
-        console.log("User" , user)
-        alert("Filled All fields")
-      }
-
     } catch (error) {
       console.log("Data Not Entered");
 
@@ -95,6 +98,7 @@ function Addblog() {
                         value={user.author}
                         onChange={dataHandler}
                         className="w-100"
+                        required
                       />
                     </div>
 
@@ -109,6 +113,7 @@ function Addblog() {
                         value={user.heading}
                         onChange={dataHandler}
                         className="w-100"
+                        required
                       />
                     </div>
 
@@ -124,6 +129,8 @@ function Addblog() {
                         value={user.content}
                         onChange={dataHandler}
                         className="w-100 form-control"
+                     //   maxLength="10"
+                        required
                       ></textarea>
                     </div>
 
@@ -138,6 +145,7 @@ function Addblog() {
                         value={user.image}
                         onChange={dataHandler}
                         className="w-100"
+                        required
                       />
                     </div>
 
